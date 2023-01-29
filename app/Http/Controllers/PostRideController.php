@@ -42,7 +42,54 @@ class PostRideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->post();
+        // $request->validate([
+        //    'Origin' => 'required',
+        //    'destinantion' => 'required',
+        //    'type' => 'required',
+        //    'brand'=> 'required',
+        //    'model' => 'required',
+        //    'color' => 'required',
+        //    'year' => 'required',
+        //    'licenese_number' => 'required',
+        //    'luggage' => 'required',
+        //    'people' => 'required',
+        //    'seat' => 'required',
+        //    'price' => 'required'
+        // ]);
+
+        $data = new PostRide();
+        //echo "<pre>";
+        //print_r($data);
+        //die;
+        $data->orgin = $request->post('Origin');
+        $data->destination = $request->post('destinantion');
+        $data->dates = $request->post('date');
+        $data->time = $request->post('time');
+        $data->droptime = $request->post('dtime');
+        $data->type = $request->post('type');
+        $data->brand = $request->post('brand');
+        $data->model = $request->post('model');
+        $data->color = $request->post('color');
+        $data->year = $request->post('year');
+        $data->license = $request->post('licenese_number');
+        $data->luggage = $request->post('luggage');
+        $data->image = $request->post('file');
+        $data->back_sitting = $request->post('people');
+        $data->seats = $request->post('seat');
+        $data->price = $request->post('price');
+        $data->save();
+        if($data)
+        {
+            $request->session()->flash('success','Ride Created Succssfully');
+            return redirect('rides');
+        }
+        else
+        {
+            print_r($data);
+        }
+        
+
     }
 
     /**
@@ -51,9 +98,10 @@ class PostRideController extends Controller
      * @param  \App\Models\PostRide  $postRide
      * @return \Illuminate\Http\Response
      */
-    public function show(PostRide $postRide)
+    public function show()
     {
-        //
+        $data = PostRide::all();
+        return view('rides',['arr'=>$data]);
     }
 
     /**

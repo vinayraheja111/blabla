@@ -13,19 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_rides', function (Blueprint $table) {
+        Schema::create('bookrides', function (Blueprint $table) {
             $table->id();
-            $table->string('orgin');
+            $table->string('origin');
             $table->string('destination');
-            $table->string('type');
-            $table->string('brand');
-            $table->string('model');
-            $table->string('color');
-            $table->Integer('year');
-            $table->string('luggage');
-            $table->string('Back Sitting');
-            $table->string('other');
-            $table->Integer('seats');
+            $table->bigInteger('post_id')->unsigned()->index(); 
+            $table->foreign('post_id')->references('id')->on('post_rides'); 
+            $table->date('date');
+            $table->Integer('seat');
             $table->Integer('price');
             $table->timestamps();
         });
@@ -38,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_rides');
+        Schema::dropIfExists('bookrides');
     }
 };

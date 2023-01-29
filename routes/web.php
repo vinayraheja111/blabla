@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostRideController;
+use App\Http\Controllers\BookrideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('post',[PostRideController::class,'index'])->name('post_dash');
+Route::post('post/insert',[PostRideController::class,'store'])->name('ride_insert');
+Route::get('rides',[PostRideController::class,'show'])->name('ride_dash');
+route::get('bookride/{id}',[BookrideController::class,'index'])->name('book_dash');
+Route::post('bookride/store',[BookrideController::class,'store'])->name('bookride');
+Route::get('/mybooking',function(){
+  return view('mybooking');
+});
 
